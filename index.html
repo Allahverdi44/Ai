@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masallı AI</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .header {
+            font-size: 2.5rem;
+            color: #ff69b4;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 600px;
+            background: #2a2a2a;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            max-height: 300px;
+            margin-bottom: 10px;
+        }
+
+        .message {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .user-message {
+            background-color: #ff69b4;
+            align-self: flex-end;
+        }
+
+        .ai-message {
+            background-color: #444;
+            align-self: flex-start;
+        }
+
+        .input-container {
+            display: flex;
+        }
+
+        .input-container input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+        }
+
+        .input-container button {
+            padding: 10px;
+            background-color: #ff69b4;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .input-container button:hover {
+            background-color: #ff85c1;
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Masallı AI</div>
+    <div class="chat-container">
+        <div class="messages" id="messages">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Sualınızı daxil edin...">
+            <button onclick="sendMessage()">Göndər</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const messages = document.getElementById('messages');
+            const userMessage = userInput.value;
+
+            if (userMessage.trim() === '') return;
+
+            // Add user message to chat
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.classList.add('message', 'user-message');
+            userMessageDiv.textContent = userMessage;
+            messages.appendChild(userMessageDiv);
+
+            // Simulate AI response
+            const aiMessageDiv = document.createElement('div');
+            aiMessageDiv.classList.add('message', 'ai-message');
+            aiMessageDiv.textContent = 'Cavab hazırlanır...';
+            messages.appendChild(aiMessageDiv);
+
+            // Scroll to the bottom
+            messages.scrollTop = messages.scrollHeight;
+
+            // Simulate AI response delay
+            setTimeout(() => {
+                aiMessageDiv.textContent = 'Bu sizin verdiyiniz sualın cavabıdır: "' + userMessage + '"';
+            }, 1000);
+
+            userInput.value = '';
+        }
+    </script>
+</body>
+</html>
